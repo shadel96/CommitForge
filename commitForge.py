@@ -134,18 +134,20 @@ end_day_dropdown = ttk.Combobox(root, textvariable=end_day_var, values=list(rang
 end_year_var = tk.IntVar(root, value=datetime.datetime.now().year)
 end_year_dropdown = ttk.Combobox(root, textvariable=end_year_var, values=list(range(2000, 2101)), width=8)
 
-print_commit_label = ttk.Label(root, text="Print commit count:")
-print_commit_dropdown = ttk.Combobox(root, textvariable=print_commit_var, values=['Yes', 'No'])
+print_commit_label = ttk.Label(root, text="Show commit count upon completion:")
+print_commit_checkbutton = ttk.Checkbutton(root, variable=print_commit_var, onvalue=1, offvalue=0)
 
 delete_log_label = ttk.Label(root, text="Delete existing git log (!!!):")
 delete_log_combobox = ttk.Combobox(root, textvariable=delete_log_var, values=['Yes', 'No'])
 
+info_label_1 = ttk.Label(root, text="Note: In order to auto-push, must be in an existing repo")
+info_label_2 = ttk.Label(root, text="Note: The following will delete all commit history from the git log (files remain intact)")
 
 run_button = ttk.Button(root, text="Run Script", command=run_script)
 
 # Layout input fields
 print_commit_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
-print_commit_dropdown.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
+print_commit_checkbutton.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
 
 min_commit_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
 min_commit_entry.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
@@ -163,13 +165,17 @@ end_month_dropdown.grid(row=4, column=1, padx=(0,150), pady=5)
 end_day_dropdown.grid(row=4, column=1, padx=(100,150), pady=5)
 end_year_dropdown.grid(row=4, column=1, padx=(100,5), pady=5)
 
-auto_push_label.grid(row=5, column=0, padx=5, pady=5, sticky="w")
-auto_push_checkbutton.grid(row=5, column=1, padx=5, pady=5, sticky="w")
+info_label_1.grid(row=5, column=0, columnspan=2, padx=5, pady=5, sticky="w")
 
-delete_log_label.grid(row=6, column=0, padx=5, pady=5, sticky="w")
-delete_log_combobox.grid(row=6, column=1, padx=5, pady=5, sticky="ew")
+auto_push_label.grid(row=6, column=0, padx=5, pady=5, sticky="w")
+auto_push_checkbutton.grid(row=6, column=1, padx=5, pady=5, sticky="w")
 
-run_button.grid(row=7, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
+info_label_2.grid(row=7, column=0, columnspan=2, padx=5, pady=5, sticky="w")
+
+delete_log_label.grid(row=8, column=0, padx=5, pady=5, sticky="w")
+delete_log_combobox.grid(row=8, column=1, padx=5, pady=5, sticky="ew")
+
+run_button.grid(row=9, column=0, columnspan=2, padx=5, pady=5, sticky="ew")
 
 # Run the main event loop
 root.mainloop()
